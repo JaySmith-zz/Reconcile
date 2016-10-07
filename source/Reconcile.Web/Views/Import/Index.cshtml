@@ -1,0 +1,44 @@
+﻿@model Reconcile.Web.ViewModels.ImportIndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Importing Transactions</h2>
+        <p>
+            Download your data from your bank in the format of >>>.
+        </p>
+    </div>
+</div>
+
+@using (Html.BeginForm("Index", "Import", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-md-12">
+
+            @Html.AntiForgeryToken()
+
+            <h4>Account: @Model.Name.</h4>
+            <hr />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            @Html.HiddenFor(model => model.AccountId)
+
+            Select a file <input type="file" name="file" />
+        </div>
+    </div>
+    <div class="row">
+        
+        <div class="col-lg-12">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Import" class="btn btn-primary"/>
+            </div>
+        </div>
+    </div>
+
+}
