@@ -2,9 +2,15 @@
 
 namespace Reconcile
 {
-    public class Transaction
+    public enum TransactionType
     {
-        public string TransactionType { get; set; }
+        Debit,
+        Credit
+    }
+
+public class Transaction
+    {
+        public TransactionType TransactionType { get; set; }
         public bool Pending { get; set; }
         public DateTime DateRecorded { get; set; }
         public DateTime DatePosted { get; set; }

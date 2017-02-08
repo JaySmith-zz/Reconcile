@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
 
 namespace Reconcile
 {
@@ -7,14 +10,31 @@ namespace Reconcile
     {
         public Account()
         {
-            Transactions = new List<Transaction>();
+            Transactions = new ObservableCollection<Transaction>();
+            Transactions.CollectionChanged += Transactions_CollectionChanged;
+        }
+
+        private void Transactions_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            var balance = StartingBalance;
+
+            foreach (var transaction in Transactions)
+            {
+                if (transaction.TransactionType == TransactionType.Debit)
+                    balance = balance - transaction.Amount;
+
+                if (transaction.TransactionType == TransactionType.Credit)
+                    balance = balance + transaction.Amount;
+            }
+
+            AvailableBalance = balance;
         }
 
         public Account(string accountName, decimal startingBalance)
         {
             Name = accountName;
             StartingBalance = startingBalance;
-            Transactions = new List<Transaction>();
+            Transactions = new ObservableCollection<Transaction>();
         }
 
         public string BankId { get; set; }
@@ -27,7 +47,7 @@ namespace Reconcile
         public decimal AvailableBalance { get; set; }
         public DateTime AvailableBalanceDate { get; set; }
 
-        public List<Transaction> Transactions { get; set; }
+        public ObservableCollection<Transaction> Transactions { get; private set; }
 
         public decimal LastBalanceDate { get; set; }
         public DateTime LastBalanceAmount { get; set; }

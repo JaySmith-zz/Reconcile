@@ -302,10 +302,9 @@
     <Content Include="Views\Home\Add.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Import\Index.cshtml" />
+    <Content Include="Views\Transaction\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Transaction\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />

@@ -33,7 +33,7 @@ namespace Reconcile.Web.Controllers
         [HttpPost]
         public ActionResult Index(HttpPostedFileBase file, HomeIndexViewModel model)
         {
-            // Import Transactions into account
+            // Import AccountTransactions into account
 
             // Update existing
 

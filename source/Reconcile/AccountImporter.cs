@@ -75,7 +75,7 @@ namespace Reconcile
                     FitId = item.TransactionID,
                     CheckNumber = item.CheckNum,
                     Name = item.Name,
-                    TransactionType = item.TransType.ToString()
+                    TransactionType = TransactionType.Credit//item.TransType.ToString()
                 });
             }
 
